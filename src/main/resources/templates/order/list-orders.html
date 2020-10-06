@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout.html}">
+
+<head>
+    <title>Lista de order de serviços!</title>
+</head>
+
+<body>
+    <div id="content" layout:fragment="content">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Order de serviços</h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Usuário</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Usuário</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr th:each="serviceOrder: ${serviceOrders}">
+                                <td th:text="${serviceOrder.id}"></td>
+                                <td th:text="${serviceOrder.user}"></td>
+                                <td th:text="${serviceOrder.status}"></td>
+                                <td>
+                                    <a th:href="@{/service-order/edit} + '/' + ${serviceOrder.id}"><i class="fas fa-pencil"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

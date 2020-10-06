@@ -1,0 +1,13 @@
+.add-user {
+    background: url(../img/add-user.svg);
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+}
+
+.add-order {
+    background: url(../img/undraw_service_order.svg);
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+}

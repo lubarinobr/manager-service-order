@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout.html}">
+
+<head>
+    <title>Novo usuário</title>
+</head>
+
+<body>
+    <div id="content" layout:fragment="content">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block add-user"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro de usuário</h1>
+                        </div>
+                        <form class="user" th:action="@{/user/add}" th:object="${user}" method="post">
+                            <ul>
+                                <li th:each="error : ${#fields.errors('name')}" th:text="${error}" />
+                                <li th:each="error : ${#fields.errors('surname')}" th:text="${error}" />
+                                <li th:each="error : ${#fields.errors('email')}" th:text="${error}" />
+                                <li th:each="error : ${#fields.errors('phone')}" th:text="${error}" />
+                            </ul>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome" th:field="*{name}"
+                                           th:classappend="${#fields.hasErrors('name')} ? 'error-field'">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Sobrenome" th:field="*{surname}"
+                                           th:classappend="${#fields.hasErrors('surname')} ? 'error-field'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="email" th:field="*{email}"
+                                       th:classappend="${#fields.hasErrors('email')} ? 'error-field'">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user" id="exampleInputPhone" placeholder="telefone" th:field="*{phone}"
+                                       th:classappend="${#fields.hasErrors('phone')} ? 'error-field'">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Cadastrar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
