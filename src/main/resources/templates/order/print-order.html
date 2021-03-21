@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout.html}">
+
+    <head>
+        <title>Imprimir order de serviço</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+        <script src="/js/printOrdenServico.js"></script>
+    </head>
+
+    <body>
+        <div id="content" layout:fragment="content">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block add-order"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div id="content-to-print">
+                                <form class="user" th:action="@{/service-order/edit}" th:object="${serviceOrder}" method="post">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
+                                        <li th:each="error : ${#fields.errors('equipment')}" th:text="${error}"></li>
+                                    </ul>
+                                    <input type="hidden" th:value="${serviceOrder.userId}" th:field="*{userId}">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">ID</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="serviceOrderId" th:field="*{id}"
+                                                   th:value="${serviceOrder.id}"
+                                                   th:classappend="${#fields.hasErrors('description')} ? 'error-field'" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-6 mb-sm-0 input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Cliente</span>
+                                            </div>
+                                            <select id="userSelect" class="selectpicker form-control" data-live-search="true" th:field="*{userId}" required disabled>
+                                                <option value="">Selecione</option>
+                                                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"> </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-6 mb-sm-0 input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Descrição</span>
+                                            </div>
+                                            <textarea  maxlength="100" class="form-control" id="descriptionText" placeholder="Descrição" th:field="*{description}"
+                                                      th:classappend="${#fields.hasErrors('description')} ? 'error-field'"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Equipamentos</span>
+                                            </div>
+                                            <textarea disabled type="text" class="form-control" id="equipmentText" placeholder="Equipamentos" th:field="*{equipment}"
+                                                      th:classappend="${#fields.hasErrors('equipment')} ? 'error-field'"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-6 mb-sm-0 input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Status</span>
+                                            </div>
+                                            <select id="statusSelect" class="selectpicker form-control" data-live-search="true" th:field="*{status}" required disabled >
+                                                <option value="">Selecione</option>
+                                                <option th:each="s : ${status}" th:value="${s}" th:text="${s.value}"> </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                                <button id="generatePDF" class="btn btn-primary btn-user btn-block">
+                                    Criar PDF
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+</html>

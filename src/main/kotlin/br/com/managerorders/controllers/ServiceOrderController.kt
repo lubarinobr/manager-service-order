@@ -74,4 +74,14 @@ class ServiceOrderController(
         return "redirect:/service-order"
     }
 
+    @GetMapping("/print/{id}")
+    fun printServiceOrder(
+            @PathVariable("id") id: Int,
+            model: Model
+    ): String {
+        print("Teste print: $id\n")
+        model.addAttribute("serviceOrder", CreateOrderDTO())
+        return "order/print-order.html"
+    }
+
 }
