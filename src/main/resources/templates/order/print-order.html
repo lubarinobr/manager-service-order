@@ -28,7 +28,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">ID</span>
                                             </div>
-                                            <input type="text" class="form-control" id="exampleFirstName" placeholder="Descrição" th:field="*{id}"
+                                            <input type="text" class="form-control" id="serviceOrderId" th:field="*{id}"
                                                    th:value="${serviceOrder.id}"
                                                    th:classappend="${#fields.hasErrors('description')} ? 'error-field'" disabled/>
                                         </div>
@@ -38,7 +38,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Cliente</span>
                                             </div>
-                                            <select class="selectpicker form-control" data-live-search="true" th:field="*{userId}" required disabled>
+                                            <select id="userSelect" class="selectpicker form-control" data-live-search="true" th:field="*{userId}" required disabled>
                                                 <option value="">Selecione</option>
                                                 <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"> </option>
                                             </select>
@@ -49,7 +49,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Descrição</span>
                                             </div>
-                                            <textarea class="form-control" id="exampleFirstName" placeholder="Descrição" th:field="*{description}"
+                                            <textarea  maxlength="100" class="form-control" id="descriptionText" placeholder="Descrição" th:field="*{description}"
                                                       th:classappend="${#fields.hasErrors('description')} ? 'error-field'"></textarea>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Equipamentos</span>
                                             </div>
-                                            <textarea type="text" class="form-control" id="exampleEquipment" placeholder="Equipamentos" th:field="*{equipment}"
+                                            <textarea disabled type="text" class="form-control" id="equipmentText" placeholder="Equipamentos" th:field="*{equipment}"
                                                       th:classappend="${#fields.hasErrors('equipment')} ? 'error-field'"></textarea>
                                         </div>
                                     </div>
@@ -67,19 +67,18 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Status</span>
                                             </div>
-                                            <select class="selectpicker form-control" data-live-search="true" th:field="*{status}" required>
+                                            <select id="statusSelect" class="selectpicker form-control" data-live-search="true" th:field="*{status}" required disabled >
                                                 <option value="">Selecione</option>
                                                 <option th:each="s : ${status}" th:value="${s}" th:text="${s.value}"> </option>
                                             </select>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Salvar
-                                    </button>
                                 </form>
+                                <button id="generatePDF" class="btn btn-primary btn-user btn-block">
+                                    Criar PDF
+                                </button>
                             </div>
 
-                            <button id="cmd">generate PDF</button>
                         </div>
                     </div>
                 </div>
